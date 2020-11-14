@@ -1,6 +1,16 @@
 # this is an auto generated file. This will be overwritten
-query Echo($message: String) {
-  echo(message: $message) {
+query Echo($mess: String) {
+  echo(mess: $mess) {
+    status
+    body
+  }
+}
+query Returnecho($expectRegValue: Int, $userName: String, $shipId: String) {
+  returnecho(
+    expectRegValue: $expectRegValue
+    userName: $userName
+    shipId: $shipId
+  ) {
     status
     body
   }
@@ -14,8 +24,8 @@ query GetShip($id: ID!) {
     crews {
       items {
         id
-        name
         shipID
+        userName
         createdAt
         updatedAt
       }
@@ -48,8 +58,8 @@ query ListShips(
 query GetCrew($id: ID!) {
   getCrew(id: $id) {
     id
-    name
     shipID
+    userName
     ship {
       id
       title
@@ -73,8 +83,8 @@ query ListCrews(
   listCrews(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      name
       shipID
+      userName
       ship {
         id
         title

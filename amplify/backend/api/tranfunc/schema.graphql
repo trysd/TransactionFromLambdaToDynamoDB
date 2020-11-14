@@ -9,8 +9,8 @@ type Ship @model {
 
 type Crew @model @key(name: "byShip", fields: ["shipID", "createdAt"]) {
   id: ID!
-  name: String!
   shipID: ID!
+  userName: String!
   ship: Ship @connection(fields: ["shipID"])
   createdAt: AWSTimestamp
 }
@@ -20,7 +20,8 @@ type ResponceEcho {
   body: String
 }
 
-type Query {
-  echo(message: String): ResponceEcho @function(name: "tranfunc-${env}")
-}
 
+type Query {
+  echo(mess: String): ResponceEcho @function(name: "tranfunc-${env}")
+  returnecho(expectRegValue: Int, userName: String, shipId: String): ResponceEcho @function(name: "returnfunc-${env}")
+}

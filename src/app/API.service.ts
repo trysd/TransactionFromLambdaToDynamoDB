@@ -92,14 +92,14 @@ export type DeleteShipInput = {
 
 export type CreateCrewInput = {
   id?: string | null;
-  name: string;
   shipID: string;
+  userName: string;
   createdAt?: number | null;
 };
 
 export type ModelCrewConditionInput = {
-  name?: ModelStringInput | null;
   shipID?: ModelIDInput | null;
+  userName?: ModelStringInput | null;
   createdAt?: ModelIntInput | null;
   and?: Array<ModelCrewConditionInput | null> | null;
   or?: Array<ModelCrewConditionInput | null> | null;
@@ -124,8 +124,8 @@ export type ModelIDInput = {
 
 export type UpdateCrewInput = {
   id: string;
-  name?: string | null;
   shipID?: string | null;
+  userName?: string | null;
   createdAt?: number | null;
 };
 
@@ -146,8 +146,8 @@ export type ModelShipFilterInput = {
 
 export type ModelCrewFilterInput = {
   id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
   shipID?: ModelIDInput | null;
+  userName?: ModelStringInput | null;
   createdAt?: ModelIntInput | null;
   and?: Array<ModelCrewFilterInput | null> | null;
   or?: Array<ModelCrewFilterInput | null> | null;
@@ -165,8 +165,8 @@ export type CreateShipMutation = {
     items: Array<{
       __typename: "Crew";
       id: string;
-      name: string;
       shipID: string;
+      userName: string;
       createdAt: number | null;
       updatedAt: string;
     } | null> | null;
@@ -187,8 +187,8 @@ export type UpdateShipMutation = {
     items: Array<{
       __typename: "Crew";
       id: string;
-      name: string;
       shipID: string;
+      userName: string;
       createdAt: number | null;
       updatedAt: string;
     } | null> | null;
@@ -209,8 +209,8 @@ export type DeleteShipMutation = {
     items: Array<{
       __typename: "Crew";
       id: string;
-      name: string;
       shipID: string;
+      userName: string;
       createdAt: number | null;
       updatedAt: string;
     } | null> | null;
@@ -223,8 +223,8 @@ export type DeleteShipMutation = {
 export type CreateCrewMutation = {
   __typename: "Crew";
   id: string;
-  name: string;
   shipID: string;
+  userName: string;
   ship: {
     __typename: "Ship";
     id: string;
@@ -245,8 +245,8 @@ export type CreateCrewMutation = {
 export type UpdateCrewMutation = {
   __typename: "Crew";
   id: string;
-  name: string;
   shipID: string;
+  userName: string;
   ship: {
     __typename: "Ship";
     id: string;
@@ -267,8 +267,8 @@ export type UpdateCrewMutation = {
 export type DeleteCrewMutation = {
   __typename: "Crew";
   id: string;
-  name: string;
   shipID: string;
+  userName: string;
   ship: {
     __typename: "Ship";
     id: string;
@@ -292,6 +292,12 @@ export type EchoQuery = {
   body: string | null;
 };
 
+export type ReturnechoQuery = {
+  __typename: "ResponceEcho";
+  status: number | null;
+  body: string | null;
+};
+
 export type GetShipQuery = {
   __typename: "Ship";
   id: string;
@@ -303,8 +309,8 @@ export type GetShipQuery = {
     items: Array<{
       __typename: "Crew";
       id: string;
-      name: string;
       shipID: string;
+      userName: string;
       createdAt: number | null;
       updatedAt: string;
     } | null> | null;
@@ -335,8 +341,8 @@ export type ListShipsQuery = {
 export type GetCrewQuery = {
   __typename: "Crew";
   id: string;
-  name: string;
   shipID: string;
+  userName: string;
   ship: {
     __typename: "Ship";
     id: string;
@@ -359,8 +365,8 @@ export type ListCrewsQuery = {
   items: Array<{
     __typename: "Crew";
     id: string;
-    name: string;
     shipID: string;
+    userName: string;
     ship: {
       __typename: "Ship";
       id: string;
@@ -387,8 +393,8 @@ export type OnCreateShipSubscription = {
     items: Array<{
       __typename: "Crew";
       id: string;
-      name: string;
       shipID: string;
+      userName: string;
       createdAt: number | null;
       updatedAt: string;
     } | null> | null;
@@ -409,8 +415,8 @@ export type OnUpdateShipSubscription = {
     items: Array<{
       __typename: "Crew";
       id: string;
-      name: string;
       shipID: string;
+      userName: string;
       createdAt: number | null;
       updatedAt: string;
     } | null> | null;
@@ -431,8 +437,8 @@ export type OnDeleteShipSubscription = {
     items: Array<{
       __typename: "Crew";
       id: string;
-      name: string;
       shipID: string;
+      userName: string;
       createdAt: number | null;
       updatedAt: string;
     } | null> | null;
@@ -445,8 +451,8 @@ export type OnDeleteShipSubscription = {
 export type OnCreateCrewSubscription = {
   __typename: "Crew";
   id: string;
-  name: string;
   shipID: string;
+  userName: string;
   ship: {
     __typename: "Ship";
     id: string;
@@ -467,8 +473,8 @@ export type OnCreateCrewSubscription = {
 export type OnUpdateCrewSubscription = {
   __typename: "Crew";
   id: string;
-  name: string;
   shipID: string;
+  userName: string;
   ship: {
     __typename: "Ship";
     id: string;
@@ -489,8 +495,8 @@ export type OnUpdateCrewSubscription = {
 export type OnDeleteCrewSubscription = {
   __typename: "Crew";
   id: string;
-  name: string;
   shipID: string;
+  userName: string;
   ship: {
     __typename: "Ship";
     id: string;
@@ -528,8 +534,8 @@ export class APIService {
             items {
               __typename
               id
-              name
               shipID
+              userName
               createdAt
               updatedAt
             }
@@ -566,8 +572,8 @@ export class APIService {
             items {
               __typename
               id
-              name
               shipID
+              userName
               createdAt
               updatedAt
             }
@@ -604,8 +610,8 @@ export class APIService {
             items {
               __typename
               id
-              name
               shipID
+              userName
               createdAt
               updatedAt
             }
@@ -634,8 +640,8 @@ export class APIService {
         createCrew(input: $input, condition: $condition) {
           __typename
           id
-          name
           shipID
+          userName
           ship {
             __typename
             id
@@ -672,8 +678,8 @@ export class APIService {
         updateCrew(input: $input, condition: $condition) {
           __typename
           id
-          name
           shipID
+          userName
           ship {
             __typename
             id
@@ -710,8 +716,8 @@ export class APIService {
         deleteCrew(input: $input, condition: $condition) {
           __typename
           id
-          name
           shipID
+          userName
           ship {
             __typename
             id
@@ -740,22 +746,49 @@ export class APIService {
     )) as any;
     return <DeleteCrewMutation>response.data.deleteCrew;
   }
-  async Echo(message?: string): Promise<EchoQuery> {
-    const statement = `query Echo($message: String) {
-        echo(message: $message) {
+  async Echo(mess?: string): Promise<EchoQuery> {
+    const statement = `query Echo($mess: String) {
+        echo(mess: $mess) {
           __typename
           status
           body
         }
       }`;
     const gqlAPIServiceArguments: any = {};
-    if (message) {
-      gqlAPIServiceArguments.message = message;
+    if (mess) {
+      gqlAPIServiceArguments.mess = mess;
     }
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <EchoQuery>response.data.echo;
+  }
+  async Returnecho(
+    expectRegValue?: number,
+    userName?: string,
+    shipId?: string
+  ): Promise<ReturnechoQuery> {
+    const statement = `query Returnecho($expectRegValue: Int, $userName: String, $shipId: String) {
+        returnecho(expectRegValue: $expectRegValue, userName: $userName, shipId: $shipId) {
+          __typename
+          status
+          body
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (expectRegValue) {
+      gqlAPIServiceArguments.expectRegValue = expectRegValue;
+    }
+    if (userName) {
+      gqlAPIServiceArguments.userName = userName;
+    }
+    if (shipId) {
+      gqlAPIServiceArguments.shipId = shipId;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ReturnechoQuery>response.data.returnecho;
   }
   async GetShip(id: string): Promise<GetShipQuery> {
     const statement = `query GetShip($id: ID!) {
@@ -770,8 +803,8 @@ export class APIService {
             items {
               __typename
               id
-              name
               shipID
+              userName
               createdAt
               updatedAt
             }
@@ -833,8 +866,8 @@ export class APIService {
         getCrew(id: $id) {
           __typename
           id
-          name
           shipID
+          userName
           ship {
             __typename
             id
@@ -871,8 +904,8 @@ export class APIService {
           items {
             __typename
             id
-            name
             shipID
+            userName
             ship {
               __typename
               id
@@ -919,8 +952,8 @@ export class APIService {
             items {
               __typename
               id
-              name
               shipID
+              userName
               createdAt
               updatedAt
             }
@@ -949,8 +982,8 @@ export class APIService {
             items {
               __typename
               id
-              name
               shipID
+              userName
               createdAt
               updatedAt
             }
@@ -979,8 +1012,8 @@ export class APIService {
             items {
               __typename
               id
-              name
               shipID
+              userName
               createdAt
               updatedAt
             }
@@ -1001,8 +1034,8 @@ export class APIService {
         onCreateCrew {
           __typename
           id
-          name
           shipID
+          userName
           ship {
             __typename
             id
@@ -1031,8 +1064,8 @@ export class APIService {
         onUpdateCrew {
           __typename
           id
-          name
           shipID
+          userName
           ship {
             __typename
             id
@@ -1061,8 +1094,8 @@ export class APIService {
         onDeleteCrew {
           __typename
           id
-          name
           shipID
+          userName
           ship {
             __typename
             id

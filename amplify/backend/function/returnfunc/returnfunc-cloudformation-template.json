@@ -45,12 +45,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "tranfunc",
+            "returnfunc",
             {
               "Fn::Join": [
                 "",
                 [
-                  "tranfunc",
+                  "returnfunc",
                   "-",
                   {
                     "Ref": "env"
@@ -142,7 +142,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-tranfunc-dev-192003-deployment",
-          "S3Key": "amplify-builds/tranfunc-4a3355776b4335387955-build.zip"
+          "S3Key": "amplify-builds/returnfunc-743976723233782b726a-build.zip"
         }
       }
     },
@@ -152,12 +152,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "tranfuncLambdaRolee87a3a2e",
+            "tranfuncLambdaRole0c2ceb31",
             {
               "Fn::Join": [
                 "",
                 [
-                  "tranfuncLambdaRolee87a3a2e",
+                  "tranfuncLambdaRole0c2ceb31",
                   "-",
                   {
                     "Ref": "env"

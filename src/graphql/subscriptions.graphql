@@ -8,8 +8,8 @@ subscription OnCreateShip {
     crews {
       items {
         id
-        name
         shipID
+        userName
         createdAt
         updatedAt
       }
@@ -28,8 +28,8 @@ subscription OnUpdateShip {
     crews {
       items {
         id
-        name
         shipID
+        userName
         createdAt
         updatedAt
       }
@@ -48,8 +48,8 @@ subscription OnDeleteShip {
     crews {
       items {
         id
-        name
         shipID
+        userName
         createdAt
         updatedAt
       }
@@ -62,8 +62,8 @@ subscription OnDeleteShip {
 subscription OnCreateCrew {
   onCreateCrew {
     id
-    name
     shipID
+    userName
     ship {
       id
       title
@@ -82,8 +82,8 @@ subscription OnCreateCrew {
 subscription OnUpdateCrew {
   onUpdateCrew {
     id
-    name
     shipID
+    userName
     ship {
       id
       title
@@ -102,8 +102,8 @@ subscription OnUpdateCrew {
 subscription OnDeleteCrew {
   onDeleteCrew {
     id
-    name
     shipID
+    userName
     ship {
       id
       title

@@ -11,9 +11,11 @@
 Amplify Params - DO NOT EDIT */
 
 'use strict';
+
 const AWS = require('aws-sdk');
 const docClient = new AWS.DynamoDB.DocumentClient({region: process.env.REGION});
 const { v4: uuidv4 } = require('uuid'); // npm i --save uuid ※functionフォルダで実行
+const moment = require('moment'); // npm i --save moment
 
 exports.handler = async (event) => {
 
@@ -24,10 +26,12 @@ exports.handler = async (event) => {
   const put_params = {
     TableName: 'Ship-clanptii6fenhenfxsgaaad2im-dev', // 予測不能ならクライアントからの引数でもいい
     Item: {
+      '__typename': 'Ship',
       'id': newid, // idは必須?
       'title': 'randam-' + Math.random(1),
       'capacity': 3,
-      'registered': 0
+      'registered': 0,
+      'updatedAt': moment().utc().format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
     }
   }
 
@@ -35,7 +39,7 @@ exports.handler = async (event) => {
   try {
     await docClient.put(put_params).promise()
   } catch (e) {
-    console.log(e.message)
+    console.log(e)
   }
 
   // 読み込みの結果処理用のコールバック
@@ -60,7 +64,7 @@ exports.handler = async (event) => {
   try {
     await docClient.get(get_params, callback).promise()
   } catch (e) {
-    console.log(e.message)
+    console.log(e)
   }
 
   // クライアントに返す
@@ -70,6 +74,7 @@ exports.handler = async (event) => {
     body : JSON.stringify({
       test: process.env.MY_TEST_KEY,
       resItemValue: resItemValue,
+      // AWStimestamp: moment().unix()
     })
   };
 
