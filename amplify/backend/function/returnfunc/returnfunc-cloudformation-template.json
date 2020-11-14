@@ -142,7 +142,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-tranfunc-dev-192003-deployment",
-          "S3Key": "amplify-builds/returnfunc-743976723233782b726a-build.zip"
+          "S3Key": "amplify-builds/returnfunc-486b474b626d31697376-build.zip"
         }
       }
     },

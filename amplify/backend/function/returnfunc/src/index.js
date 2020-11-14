@@ -19,27 +19,34 @@ const moment = require('moment'); // npm i --save moment
 
 exports.handler = async (event) => {
 
-  // 書き込み
-  const put_params = {
-    TableName: 'Ship-clanptii6fenhenfxsgaaad2im-dev', // 予測不能ならクライアントからの引数でもいい
-    Item: {
-      '__typename': 'Ship',
-      'id': uuidv4(), // idは必須?
-      'title': 'randam-' + Math.random(1),
-      'capacity': 3,
-      'registered': 0,
-      'updatedAt': moment().utc().format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
-    }
-  }
-  // 結果を待つ
-  try {
-    await docClient.put(put_params).promise()
-  } catch (e) {
-    console.log(e.message)
-  }
+  // // 書き込み
+  // const put_params = {
+  //   TableName: 'Ship-clanptii6fenhenfxsgaaad2im-dev', // 予測不能ならクライアントからの引数でもいい
+  //   Item: {
+  //     '__typename': 'Ship',
+  //     'id': uuidv4(), // idは必須?
+  //     'title': 'randam-' + Math.random(1),
+  //     'capacity': 3,
+  //     'registered': 0,
+  //     'updatedAt': moment().utc().format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
+  //   }
+  // }
+  // // 結果を待つ
+  // try {
+  //   await docClient.put(put_params).promise()
+  // } catch (e) {
+  //   console.log(e.message)
+  // }
 
+  // クライアントからの引数
   const argv = event.arguments;
-  console.log(argv);
+  argv.expectRegValue = argv.expectRegValue === null ? 0 : argv.expectRegValue;
+
+  // クライアントへのエラー通知用
+  var errorCode = 0;
+
+  // クライアントへの返却用
+  var result;
 
   // UUID生成
   const newid = uuidv4();
@@ -49,7 +56,7 @@ exports.handler = async (event) => {
     TransactItems: [
       {
         Put: {
-          TableName: 'Crew-clanptii6fenhenfxsgaaad2im-dev', // process.env.API_TRANFUNC_SHIPTABLE_NAME, //
+          TableName: process.env.API_TRANFUNC_CREWTABLE_NAME,
           Item: {
             '__typename': 'Crew',
             id: newid,
@@ -58,28 +65,54 @@ exports.handler = async (event) => {
             'updatedAt': moment().utc().format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
           }
         }
+      // },{ // 引数が期待する値かで判定するパターン
+      //   Update: {
+      //     TableName: process.env.API_TRANFUNC_SHIPTABLE_NAME,
+      //     Key: {
+      //       id: argv.shipId
+      //     },
+      //     UpdateExpression: 'set #registered = :Next',
+      //     ConditionExpression: '#registered = :Prev',
+      //     ExpressionAttributeNames: {
+      //       '#registered' : 'registered'
+      //     },
+      //     ExpressionAttributeValues: {
+      //       ':Prev': argv.expectRegValue,
+      //       ':Next': argv.expectRegValue + 1
+      //     },
+      //     ReturnValues: 'UPDATED_NEW'
+      //   }
+      },{ // 他のフィールドで判定するパターン
+        Update: {
+          TableName: process.env.API_TRANFUNC_SHIPTABLE_NAME,
+          Key: { id: argv.shipId },
+          UpdateExpression: 'set #registered = #registered + :Increment',
+          ConditionExpression: '#registered < #capacity',
+          ExpressionAttributeNames: {
+            '#registered': 'registered',
+            '#capacity': 'capacity'
+          },
+          ExpressionAttributeValues: {
+            ':Increment': 1
+          }
+        }
       }
     ]
   };
 
-  console.log(params);
-
   try {
-
-    await docClient.transactWrite(params, function (err, data) {
-      if (err) console.log(err);
-      else console.log(data);
-    }).promise();
-
+    result = await docClient.transactWrite(params).promise();
   } catch (e) {
+    errorCode = 1;
     console.log('=====# err #=====');
     console.log(e);
-    console.log('=====# // #=====');
+    console.log('=====# // #===== ');
   }
 
   // TODO implement
   const response = {
-    status: 200,
+    statusCode: 200,
+    errorCode: errorCode,
     headers: { "Access-Control-Allow-Origin": "*" },
     body: JSON.stringify({
       message: 'returnfunc from Lambda!',
@@ -88,7 +121,7 @@ exports.handler = async (event) => {
         userName: argv.userName,
         shipId: argv.shipId,
         uuid: newid,
-        xxx: 123
+        result: result
       }
     }),
   };

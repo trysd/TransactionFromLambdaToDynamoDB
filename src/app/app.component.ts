@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     //   e => console.log(e)
     // );
 
-    this.api.Returnecho(2, 'userA', '79b5467d-e7e4-4580-9aed-1e5d2b97e42b').then(
+    this.api.Returnecho(0, 'userA', '79b5467d-e7e4-4580-9aed-1e5d2b97e42b').then(
       e => {
         console.log(e, JSON.parse(e.body));
       }
