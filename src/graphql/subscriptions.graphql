@@ -1,0 +1,121 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateShip {
+  onCreateShip {
+    id
+    title
+    capacity
+    registered
+    crews {
+      items {
+        id
+        name
+        shipID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateShip {
+  onUpdateShip {
+    id
+    title
+    capacity
+    registered
+    crews {
+      items {
+        id
+        name
+        shipID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteShip {
+  onDeleteShip {
+    id
+    title
+    capacity
+    registered
+    crews {
+      items {
+        id
+        name
+        shipID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateCrew {
+  onCreateCrew {
+    id
+    name
+    shipID
+    ship {
+      id
+      title
+      capacity
+      registered
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCrew {
+  onUpdateCrew {
+    id
+    name
+    shipID
+    ship {
+      id
+      title
+      capacity
+      registered
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCrew {
+  onDeleteCrew {
+    id
+    name
+    shipID
+    ship {
+      id
+      title
+      capacity
+      registered
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

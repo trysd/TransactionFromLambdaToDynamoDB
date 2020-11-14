@@ -1,0 +1,139 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateShip(
+  $input: CreateShipInput!
+  $condition: ModelShipConditionInput
+) {
+  createShip(input: $input, condition: $condition) {
+    id
+    title
+    capacity
+    registered
+    crews {
+      items {
+        id
+        name
+        shipID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateShip(
+  $input: UpdateShipInput!
+  $condition: ModelShipConditionInput
+) {
+  updateShip(input: $input, condition: $condition) {
+    id
+    title
+    capacity
+    registered
+    crews {
+      items {
+        id
+        name
+        shipID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteShip(
+  $input: DeleteShipInput!
+  $condition: ModelShipConditionInput
+) {
+  deleteShip(input: $input, condition: $condition) {
+    id
+    title
+    capacity
+    registered
+    crews {
+      items {
+        id
+        name
+        shipID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateCrew(
+  $input: CreateCrewInput!
+  $condition: ModelCrewConditionInput
+) {
+  createCrew(input: $input, condition: $condition) {
+    id
+    name
+    shipID
+    ship {
+      id
+      title
+      capacity
+      registered
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCrew(
+  $input: UpdateCrewInput!
+  $condition: ModelCrewConditionInput
+) {
+  updateCrew(input: $input, condition: $condition) {
+    id
+    name
+    shipID
+    ship {
+      id
+      title
+      capacity
+      registered
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCrew(
+  $input: DeleteCrewInput!
+  $condition: ModelCrewConditionInput
+) {
+  deleteCrew(input: $input, condition: $condition) {
+    id
+    name
+    shipID
+    ship {
+      id
+      title
+      capacity
+      registered
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}

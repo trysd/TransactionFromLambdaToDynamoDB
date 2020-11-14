@@ -1,0 +1,91 @@
+# this is an auto generated file. This will be overwritten
+query Echo($message: String) {
+  echo(message: $message) {
+    status
+    body
+  }
+}
+query GetShip($id: ID!) {
+  getShip(id: $id) {
+    id
+    title
+    capacity
+    registered
+    crews {
+      items {
+        id
+        name
+        shipID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListShips(
+  $filter: ModelShipFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listShips(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      capacity
+      registered
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetCrew($id: ID!) {
+  getCrew(id: $id) {
+    id
+    name
+    shipID
+    ship {
+      id
+      title
+      capacity
+      registered
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListCrews(
+  $filter: ModelCrewFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCrews(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      shipID
+      ship {
+        id
+        title
+        capacity
+        registered
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}

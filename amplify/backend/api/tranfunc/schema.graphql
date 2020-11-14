@@ -1,0 +1,26 @@
+type Ship @model {
+  id: ID!
+  title: String!
+  capacity: Int!
+  registered: Int!
+  crews: [Crew] @connection(keyName: "byShip", fields: ["id"])
+  createdAt: AWSTimestamp
+}
+
+type Crew @model @key(name: "byShip", fields: ["shipID", "createdAt"]) {
+  id: ID!
+  name: String!
+  shipID: ID!
+  ship: Ship @connection(fields: ["shipID"])
+  createdAt: AWSTimestamp
+}
+
+type ResponceEcho {
+  status: Int
+  body: String
+}
+
+type Query {
+  echo(message: String): ResponceEcho @function(name: "tranfunc-${env}")
+}
+
